@@ -15,10 +15,14 @@ def index(request):
     context_dict = {'boldmessage': 'Crunchy, creamy, cookie, candy, cupcake!'}
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
+    print(request.method)
+    print(request.user)
     return render(request, 'rango/index.html', context_dict)
 
 def about(request):
     context_dict = { 'your_name': 'Conor Blessing'}
+    print(request.method)
+    print(request.user)
     return render(request, 'rango/about.html', context_dict)
 
 def show_category(request, category_name_slug):
@@ -31,6 +35,8 @@ def show_category(request, category_name_slug):
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['pages'] = None
+    print(request.method)
+    print(request.user)
     return render(request, 'rango/category.html', context=context_dict)
 
 def add_category(request):
@@ -42,6 +48,8 @@ def add_category(request):
             return redirect('/rango/')
     else:
         print(form.errors)
+    print(request.method)
+    print(request.user)
     return render(request, 'rango/add_category.html', {'form': form})
 
 def add_page(request, category_name_slug):
@@ -66,4 +74,6 @@ def add_page(request, category_name_slug):
         else:
             print(form.errors)
     context_dict = {'form': form, 'category': category}
+    print(request.method)
+    print(request.user)
     return render(request, 'rango/add_page.html', context=context_dict)
